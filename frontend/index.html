@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Smart Expense Manager</title>
- <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    section { scroll-margin-top: 80px; }
+  </style>
  </head>
 <body>
 
@@ -161,10 +165,10 @@
       </p>
 
       <div class="tilt-box-container">
-        <div class="tilt-box" title="Track Expenses"></div>
-        <div class="tilt-box" title="Upload Receipts"></div>
-        <div class="tilt-box" title="Set Budgets"></div>
-        <div class="tilt-box" title="View Reports"></div>
+        <div class="tilt-box" data-title="Track Expenses"><i class="fas fa-wallet"></i></div>
+        <div class="tilt-box" data-title="Upload Receipts"><i class="fas fa-file-invoice-dollar"></i></div>
+        <div class="tilt-box" data-title="Set Budgets"><i class="fas fa-piggy-bank"></i></div>
+        <div class="tilt-box" data-title="View Reports"><i class="fas fa-chart-line"></i></div>
       </div>
     </div>
   </section>
