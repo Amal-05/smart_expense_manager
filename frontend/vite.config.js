@@ -11,6 +11,7 @@ export default defineConfig({
         expense: resolve(__dirname, 'manage_expense.html'),
         income: resolve(__dirname, 'manage_income.html'),
         profile: resolve(__dirname, 'profile.html'),
+        support: resolve(__dirname, 'support.html'),
       },
     },
   },

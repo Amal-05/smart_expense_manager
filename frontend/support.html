@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support - Smart Expense Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="support.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header style="position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: rgba(13, 17, 23, 0.8); backdrop-filter: blur(20px); display: flex; align-items: center; padding: 0 30px; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="hamburger" id="hamburger" style="font-size: 24px; cursor: pointer; color: var(--text-primary); margin-right: 20px;">☰</div>
+    <h1 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-primary);">Support</h1>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside id="sidebar" class="sidebar">
+    <ul>
+      <li><a href="budget_overview.html"><i class="fas fa-home"></i>Dashboard</a></li>
+      
+      <li class="collapsible-parent">
+        <a href="#" class="collapsible-btn">
+          <i class="fas fa-plus"></i>Manage
+          <i class="fas fa-chevron-down collapsible-icon"></i>
+        </a>
+        <ul class="collapsible-content">
+          <li><a href="manage_expense.html"><i class="fas fa-dollar-sign"></i>Expense</a></li>
+          <li><a href="manage_income.html"><i class="fas fa-sack-dollar"></i>Income</a></li>
+        </ul>
+      </li>
+
+      <li><a href="budget_overview.html"><i class="fas fa-wallet"></i>Budget</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i>Profile</a></li>
+      <li class="active"><a href="support.html"><i class="fas fa-question-circle"></i>Support</a></li>
+      <li style="margin-top:20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:20px;">
+        <a href="#" onclick="Auth.logout()" style="color:var(--text-secondary);"><i class="fas fa-sign-out-alt"></i>Logout</a>
+      </li>
+    </ul>
+  </aside>
+
+  <main class="main-content" style="padding-top: 100px;">
+    <header class="content-header">
+      <div class="header-titles">
+        <h1>Support & Contact</h1>
+        <p>How can we help you today?</p>
+      </div>
+    </header>
+
+    <div class="support-container">
+      <div class="support-grid">
+        <!-- Contact Form Card -->
+        <div class="card contact-card">
+          <h2>Send us a Message</h2>
+          <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+            <input type="hidden" name="access_key" value="bf45d183-feb8-4ece-b2dd-a28f9412dbf8">
+            <input type="hidden" name="subject" value="New Support Request from Smart Expense Manager">
+            <input type="checkbox" name="botcheck" id="" style="display: none;">
+
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" name="name" id="name" placeholder="John Doe" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" name="email" id="email" placeholder="john@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea name="message" id="message" rows="5" placeholder="Describe your issue or feedback..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">Send Message</button>
+            <div id="result" class="form-result"></div>
+          </form>
+        </div>
+
+        <!-- Info Card -->
+        <div class="info-section">
+          <div class="card info-card">
+            <h3>Quick Help</h3>
+            <ul class="help-list">
+              <li>
+                <strong>Account Issues?</strong>
+                <p>Check your profile settings or try re-logging.</p>
+              </li>
+              <li>
+                <strong>Data Not Syncing?</strong>
+                <p>Ensure you have a stable internet connection.</p>
+              </li>
+              <li>
+                <strong>Feedback?</strong>
+                <p>We'd love to hear how we can improve your experience!</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card info-card dark-card">
+            <h3>Contact Info</h3>
+            <p>Email: support@smartexpense.com</p>
+            <p>Hours: Mon - Fri, 9AM - 5PM IST</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { Auth } from './data.js';
+    window.Auth = Auth;
+    
+    // Check Auth
+    if (!Auth.isLoggedIn()) {
+      window.location.href = 'index.html';
+    }
+
+    const form = document.getElementById('contact-form');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+      result.innerHTML = "Please wait...";
+
+      fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+          },
+          body: json
+      })
+      .then(async (response) => {
+          let json = await response.json();
+          if (response.status == 200) {
+              result.innerHTML = "Message sent successfully!";
+              result.classList.add('success');
+              form.reset();
+          } else {
+              console.log(response);
+              result.innerHTML = json.message;
+              result.classList.add('error');
+          }
+      })
+      .catch(error => {
+          console.log(error);
+          result.innerHTML = "Something went wrong!";
+          result.classList.add('error');
+      })
+      .then(function() {
+          setTimeout(() => {
+              result.style.display = "none";
+          }, 5000);
+      });
+    });
+  </script>
+  <script type="module" src="nav.js"></script>
+</body>
+</html>
