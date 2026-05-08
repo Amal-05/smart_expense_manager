@@ -9,6 +9,7 @@
  </head>
 <body>
 
+  <header>
   <nav>
    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M25 46.875C37.0812 46.875 46.875 37.0812 46.875 25C46.875 12.9188 37.0812 3.125 25 3.125C12.9188 3.125 3.125 12.9188 3.125 25C3.125 37.0812 12.9188 46.875 25 46.875Z" stroke="#F0E7D5"/>
@@ -28,7 +29,8 @@
       <div class="log-in-box" onclick="openLogin()">LOG IN</div>
       <a href="sign_in.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem;">SIGN UP</a>
     </div>
-  </nav>
+    </nav>
+</header>
 
 <!-- Login Overlay -->
 <div id="login-overlay" class="overlay" onclick="if(event.target === this) closeLogin()">
