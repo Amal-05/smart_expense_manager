@@ -182,6 +182,15 @@ nav {
   padding: 1rem;
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
 .logo-text-wrapper {
   display: flex;
   flex-direction: column;
