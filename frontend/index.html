@@ -24,7 +24,7 @@
       <a href="#">Home</a>
       <a href="#features">Features</a>
       <a href="#gallery">Gallery</a>
-      <a href="#">Support</a>
+      <a href="support.html">Support</a>
     </div>
 <!-- Login button in nav -->
 <div class="log-in-box" style="font-size:1.2rem" onclick="openLogin()">LOG IN</div>
@@ -55,10 +55,10 @@
   import { Auth } from './data.js';
 
   window.openLogin = function() {
-    document.getElementById("login-overlay").style.display = "flex";
+    document.getElementById("login-overlay").classList.add("show");
   }
   window.closeLogin = function() {
-    document.getElementById("login-overlay").style.display = "none";
+    document.getElementById("login-overlay").classList.remove("show");
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -164,7 +164,7 @@
       <h2 class="feature-heading">Expense Tracking</h2>
       <div class="feature-content">
         <div class="tilt-box-feature">
-          <img src="assets/finance_ui_abstract_1_1773255104402.png" alt="Abstract Data Charts" />
+          <img src="assets/gallery_dashboard.png" alt="Dashboard Preview" />
         </div>
         <div class="feature-text">
           <p>
@@ -182,7 +182,7 @@
       <h2 class="feature-heading">Unified Dashboards</h2>
       <div class="feature-content">
         <div class="tilt-box-feature">
-          <img src="assets/finance_ui_abstract_3_1773255141779.png" alt="Secure Cloud Dashboard" />
+          <img src="assets/gallery_analytics.png" alt="Analytics Preview" />
         </div>
         <div class="feature-text">
           <p>
@@ -199,7 +199,7 @@
       <h2 class="feature-heading">Set Budgets</h2>
       <div class="feature-content">
         <div class="tilt-box-feature">
-          <img src="assets/finance_ui_abstract_2_1773255122819.png" alt="Digital Currency Budgets" />
+          <img src="assets/gallery_income.png" alt="Income Management Preview" />
         </div>
         <div class="feature-text">
           <p>
@@ -216,7 +216,7 @@
       <h2 class="feature-heading">View Reports</h2>
       <div class="feature-content">
         <div class="tilt-box-feature">
-          <img src="assets/finance_ui_abstract_4_1773255158043.png" alt="Predictive Analytics Networks" />
+          <img src="assets/gallery_expenses.png" alt="Expense Tracking Preview" />
         </div>
         <div class="feature-text">
           <p>
@@ -247,16 +247,7 @@
     <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 10px;">&copy; 2026 Smart Expense Manager. All rights reserved.</p>
   </footer>
 
-<script>
-  function openLogin() {
-    console.log("Opening modal..."); // debug
-    document.getElementById('login-overlay').classList.add('show');
-  }
-  function closeLogin() {
-    console.log("Closing modal..."); // debug
-    document.getElementById('login-overlay').classList.remove('show');
-  }
-</script>
+
 
 
 
