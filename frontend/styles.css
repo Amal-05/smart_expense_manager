@@ -52,6 +52,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  padding-top: 80px;
 }
 
 /* Mesh Gradient Glowing Orbs */
@@ -104,12 +105,13 @@ nav {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--glass-border);
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
-  z-index: 100;
+  z-index: 1200;
 }
 
-.nav-links { display: flex; gap: 3rem; }
+.nav-links { display: flex; gap: 3rem; align-items: center; }
 .nav-links a {
   color: var(--text-secondary);
   text-decoration: none;
@@ -500,4 +502,49 @@ button {
 button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3); background: var(--accent-hover); }
 
 .btn-secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--text-primary); }
-.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); }
+/* --- UNIFIED DASHBOARD UI --- */
+header {
+  display: flex; align-items: center; background: var(--nav-bg); backdrop-filter: var(--glass-blur);
+  padding: 1rem 1.5rem; position: fixed; width: 100%; top: 0; left: 0; z-index: 1100;
+  border-bottom: 1px solid var(--glass-border); height: 70px;
+}
+.hamburger { font-size: 1.8rem; cursor: pointer; margin-right: 1.5rem; color: var(--text-primary); transition: transform 0.3s ease; }
+.hamburger:hover { transform: scale(1.1); }
+.header-title { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-heading); margin: 0; }
+
+.sidebar {
+  position: fixed; top: 70px; left: 0; width: 280px; height: calc(100% - 70px);
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+  border-right: 1px solid var(--glass-border);
+  transform: translateX(-100%); transition: transform 0.4s ease;
+  z-index: 1001; overflow-y: auto;
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar ul { list-style: none; padding: 1rem; }
+.sidebar ul li { margin: 0.5rem 0; }
+.sidebar ul li a {
+  color: var(--text-secondary); text-decoration: none; font-size: 1.05rem;
+  padding: 0.8rem 1rem; border-radius: 12px; display: flex; align-items: center; gap: 15px;
+  transition: all 0.3s ease;
+}
+.sidebar ul li a:hover, .sidebar ul li a.active { background: rgba(255, 255, 255, 0.05); color: var(--text-primary); transform: translateX(5px); }
+.sidebar ul li a i { color: var(--text-primary); opacity: 0.8; width: 24px; text-align: center; font-size: 1.2rem; }
+
+.overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(2, 6, 23, 0.7); backdrop-filter: blur(4px); opacity: 0; visibility: hidden;
+  transition: all 0.3s ease; z-index: 1000;
+}
+.overlay.show { opacity: 1; visibility: visible; }
+
+.collapsible-parent .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding-left: 20px; }
+.collapsible-parent.active .collapsible-content { max-height: 250px; }
+.collapsible-icon { transition: transform 0.3s ease; margin-left: auto; }
+.collapsible-parent.active .collapsible-icon { transform: rotate(180deg); }
+
+.main-content { padding-top: 100px; min-height: 100vh; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+/* Modal Eye Toggle */
+.password-toggle { cursor: pointer; color: var(--text-secondary); }
+.password-toggle:hover { color: var(--text-primary); }
