@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker - Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+<header>
+  <div class="hamburger" id="hamburger">☰</div>
+  <h1 class="header-title">Profile</h1>
+</header>
+<div class="overlay" id="overlay"></div>
+
+<aside id="sidebar" class="sidebar">
+  <ul>
+    <li><a href="budget_overview.html"><i class="fas fa-home"></i>Dashboard</a></li>
+    
+    <li class="collapsible-parent">
+      <a href="#" class="collapsible-btn">
+        <i class="fas fa-plus"></i>Manage
+        <i class="fas fa-chevron-down collapsible-icon"></i>
+      </a>
+      <ul class="collapsible-content">
+        <li><a href="manage_expense.html"><i class="fas fa-dollar-sign"></i>Expense</a></li>
+        <li><a href="manage_income.html"><i class="fas fa-sack-dollar"></i>Income</a></li>
+      </ul>
+    </li>
+
+    <li><a href="budget_overview.html"><i class="fas fa-wallet"></i>Budget</a></li>
+    <li><a href="profile.html"><i class="fas fa-user"></i>Profile</a></li>
+    <li style="margin-top:20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:20px;">
+      <a href="index.html" style="color:var(--text-secondary);"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </li>
+  </ul>
+</aside>
+
+<div class="container">
+  <h1 class="page-title">Your Profile</h1>
+
+  <div class="content">
+    <section class="glass-box">
+      <div class="profile-header">
+        <div class="profile-picture">
+          <i class="fas fa-user"></i>
+          <div class="change-photo-btn">Change</div>
+        </div>
+        <div class="profile-info">
+          <h3 id="display-name">Amal R</h3>
+          <p id="display-email">amal@gmail.com</p>
+          <p class="member-since">Member since September 2025</p>
+        </div>
+      </div>
+
+      <h2>Personal Details</h2>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <div class="input-with-button">
+          <input type="text" id="name" value="Amal R" disabled>
+          <button class="btn-small btn-outline" onclick="toggleEdit('name')">Change</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-with-button">
+          <input type="email" id="email" value="amal@gmail.com" disabled>
+          <button class="btn-small btn-outline" onclick="toggleEdit('email')">Change</button>
+        </div>
+      </div>
+
+      <h2>Settings</h2>
+      <div class="toggle-container">
+        <label class="toggle-label">Email Notifications</label>
+        <label class="toggle-switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <div class="button-group">
+          <button class="btn-danger" id="logoutBtn">Logout</button>
+          <button id="saveChangesBtn">Save Changes</button>
+          <button class="btn-secondary" id="changePasswordBtn">Change Password</button>
+        </div>
+        <div class="button-group">
+          <button class="btn-outline" onclick="window.location.href='manage_expense.html'">Manage Expenses</button>
+          <button class="btn-outline" onclick="window.location.href='manage_income.html'">Manage Income</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="background-logo">
+    <svg viewBox="0 0 500 500">
+      <path d="M250 0C111.93 0 0 111.93 0 250s111.93 250 250 250 250-111.93 250-250S388.07 0 250 0zm0 475C129.11 475 30 375.89 30 255S129.11 35 250 35s220 99.11 220 220-99.11 220-220 220zm-75-220a75 75 0 1 0 150 0 75 75 0 0 0-150 0z"/>
+    </svg>
+  </div>
+</div>
+
+<div class="modal-overlay" id="passwordModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">Change Password</h2>
+      <button class="modal-close" id="closeModal">&times;</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="form-group password-group">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword" placeholder="Enter your current password">
+        <span class="password-toggle" id="toggleCurrentPassword"></span>
+      </div>
+
+      <div class="form-group password-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" placeholder="Enter your new password">
+        <span class="password-toggle" id="toggleNewPassword"></span>
+      </div>
+
+      <div class="form-group password-group">
+        <label for="confirmPassword">Confirm New Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your new password">
+        <span class="password-toggle" id="toggleConfirmPassword"></span>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline" id="cancelPasswordChange">Cancel</button>
+      <button id="submitPasswordChange">Update Password</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="profile.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

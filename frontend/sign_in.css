@@ -1,0 +1,169 @@
+@import url('styles.css');
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  /* styles.css provides bg-gradient and font */
+}
+
+.background-logo { display: none; /* Hide confusing background logo */ }
+
+.main-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  width: 100%;
+}
+
+.glass-box {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 32px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 4rem 3rem;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.glass-box::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+}
+
+.glass-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 40px rgba(139, 92, 246, 0.15);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.glass-box h1 {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.create-account-form {
+  position: relative;
+  z-index: 1;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.input-group label {
+  position: absolute;
+  left: 0;
+  top: -22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.input-group input {
+  width: 100%;
+  height: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0 20px;
+  font-size: 1.05rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.input-group input:focus {
+  border-color: var(--accent-cyan);
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 0 0 4px rgba(6, 182, 212, 0.15);
+}
+
+.input-group input.error {
+  border-color: #EF4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.error-message {
+  position: absolute; left: 0; top: 62px;
+  font-size: 0.8rem; color: #EF4444; font-weight: 500;
+  display: none; margin-top: 5px; z-index: 2;
+}
+
+.create-account-btn {
+  width: 100%; height: 55px;
+  background: var(--accent-gradient);
+  color: white; border: none; border-radius: 16px;
+  font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  cursor: pointer; transition: all 0.3s ease; margin-top: 1rem;
+}
+
+.create-account-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+  background: var(--accent-hover);
+}
+
+.login-link {
+  text-align: center; margin-top: 2rem; position: relative; z-index: 1;
+}
+
+.login-link p { color: var(--text-secondary); font-size: 0.9rem; }
+
+.login-link a {
+  color: #8B5CF6; text-decoration: none; font-weight: 600;
+  transition: all 0.3s ease; position: relative;
+}
+.login-link a:hover { color: #A78BFA; }
+
+@media (max-width: 480px) {
+  .glass-box { padding: 2rem 1.5rem; }
+  .glass-box h1 { font-size: 1.8rem; }
+  .input-group input { height: 50px; }
+  .create-account-btn { height: 50px; }
+}
+
+.success-message {
+  display: none; margin-top: 1rem; text-align: center; font-weight: 600;
+  color: #4ADE80; font-family: var(--font-heading); transition: opacity 0.3s ease; opacity: 0;
+}
+.success-message.show { display: block; opacity: 1; }
+
+.back-button {
+  position: absolute; top: 20px; left: 20px;
+  background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);
+  border-radius: 50%; padding: 12px; color: var(--text-primary);
+  text-decoration: none; transition: all 0.3s ease; display: flex;
+  justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.1);
+}
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.2); transform: scale(1.05); color: #8B5CF6;
+}
+.back-button svg { width: 20px; height: 20px; }

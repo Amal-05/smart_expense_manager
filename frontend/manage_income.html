@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Manage Income</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="manage_income.css">
+</head>
+<body>
+<header>
+  <div class="hamburger" id="hamburger">☰</div>
+  <h1 class="header-title">Income</h1>
+</header>
+<div class="overlay" id="overlay"></div>
+
+<aside id="sidebar" class="sidebar">
+  <ul>
+    <li><a href="budget_overview.html"><i class="fas fa-home"></i>Dashboard</a></li>
+    
+    <li class="collapsible-parent">
+      <a href="#" class="collapsible-btn">
+        <i class="fas fa-plus"></i>Manage
+        <i class="fas fa-chevron-down collapsible-icon"></i>
+      </a>
+      <ul class="collapsible-content">
+        <li><a href="manage_expense.html"><i class="fas fa-dollar-sign"></i>Expense</a></li>
+        <li><a href="manage_income.html"><i class="fas fa-sack-dollar"></i>Income</a></li>
+      </ul>
+    </li>
+
+    <li><a href="budget_overview.html"><i class="fas fa-wallet"></i>Budget</a></li>
+    <li><a href="profile.html"><i class="fas fa-user"></i>Profile</a></li>
+    <li style="margin-top:20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:20px;">
+      <a href="index.html" style="color:var(--text-secondary);"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </li>
+  </ul>
+</aside>
+
+    <div class="container">
+        <h1 class="page-title">Manage Income</h1>
+
+        <div class="content">
+            <section class="glass-box">
+                <h2>Add New Income</h2>
+                <form id="income-form">
+                    <div class="form-group">
+                        <label for="source">Income Source</label>
+                        <input type="text" id="source" placeholder="e.g., Salary, Freelance, Gifts" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount">Amount (₹)</label>
+                        <input type="number" id="amount" min="0" step="0.01" placeholder="0.00" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Date Received</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Category (Optional)</label>
+                        <select id="category">
+                            <option value="">Select a category</option>
+                            <option value="salary">Salary</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="gifts">Gifts</option>
+                            <option value="investment">Investment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Notes (Optional)</label>
+                        <textarea id="notes" rows="3" placeholder="Add any additional details"></textarea>
+                    </div>
+                    
+                    <div class="actions">
+                        <button type="submit">Add Income</button>
+                        <button type="reset" class="btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="glass-box">
+                <h2>Income Summary</h2>
+                
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-value" id="summary-month">₹0.00</div>
+                        <div class="summary-label">This Month</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-value" id="summary-year">₹0.00</div>
+                        <div class="summary-label">This Year</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-value" id="summary-avg">₹0.00</div>
+                        <div class="summary-label">Monthly Average</div>
+                    </div>
+                </div>
+                
+                <h2>Your Income Records</h2>
+                
+                <div id="income-container">
+                    <table id="income-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Source</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="income-body">
+                            <!-- Income records will be added here dynamically -->
+                        </tbody>
+                    </table>
+                    
+                    <div id="empty-state" class="empty-state">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <p>No income records added yet</p>
+                    </div>
+                </div>
+                
+                <div class="total-income">
+                    Total: ₹<span id="total-amount">0.00</span>
+                </div>
+            </section>
+        </div>
+
+        <div class="background-logo">
+            <svg viewBox="0 0 500 500">
+                <path d="M250 0C111.93 0 0 111.93 0 250s111.93 250 250 250 250-111.93 250-250S388.07 0 250 0zm0 475C129.11 475 30 375.89 30 255S129.11 35 250 35s220 99.11 220 220-99.11 220-220 220zm-75-220a75 75 0 1 0 150 0 75 75 0 0 0-150 0z"/>
+            </svg>
+        </div>
+    </div>
+
+<script type="module" src="manage_income.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

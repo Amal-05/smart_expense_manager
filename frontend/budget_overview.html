@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="budget_overview.css">
+</head>
+<body>
+<header>
+  <div class="hamburger" id="hamburger">☰</div>
+  <h1 class="header-title">Dashboard</h1>
+</header>
+<div class="overlay" id="overlay"></div>
+
+<aside id="sidebar" class="sidebar">
+  <ul>
+    <li><a href="budget_overview.html"><i class="fas fa-home"></i>Dashboard</a></li>
+    
+    <li class="collapsible-parent">
+      <a href="#" class="collapsible-btn">
+        <i class="fas fa-plus"></i>Manage
+        <i class="fas fa-chevron-down collapsible-icon"></i>
+      </a>
+      <ul class="collapsible-content">
+        <li><a href="manage_expense.html"><i class="fas fa-dollar-sign"></i>Expense</a></li>
+        <li><a href="manage_income.html"><i class="fas fa-sack-dollar"></i>Income</a></li>
+      </ul>
+    </li>
+
+    <li><a href="budget_overview.html"><i class="fas fa-wallet"></i>Budget</a></li>
+    <li><a href="profile.html"><i class="fas fa-user"></i>Profile</a></li>
+    <li style="margin-top:20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:20px;">
+      <a href="index.html" style="color:var(--text-secondary);"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </li>
+  </ul>
+</aside>
+
+  <div class="container">
+    <h1 class="page-title">Budget Overview</h1>
+    
+    <div class="budget-container">
+      <div class="glass-box">
+        <div class="budget-header">
+          <div class="viewing-text">VIEWING:</div>
+          <div class="month-display">
+            <i class="fas fa-calendar-alt calendar-icon"></i>
+            <input type="month" id="monthPicker" value="2025-09">
+          </div>
+        </div>
+        
+        <div class="budget-cards">
+          <div class="budget-card">
+            <h3>Budget Usage</h3>
+            <div class="progress-ring">
+              <svg viewBox="0 0 100 100">
+                <circle class="progress-ring-bg" cx="50" cy="50" r="40" />
+                <circle class="progress-ring-value" cx="50" cy="50" r="40" />
+              </svg>
+              <div class="progress-text">0%</div>
+            </div>
+            <div class="subtext">₹0 OF ₹0</div>
+          </div>
+          
+          <div class="budget-card">
+            <h3>Income</h3>
+            <div class="amount" id="budget-income">0</div>
+          </div>
+          
+          <div class="budget-card">
+            <h3>Expenses</h3>
+            <div class="amount" id="budget-expenses">0</div>
+          </div>
+          <div class="budget-card">
+            <h3>Balance</h3>
+            <div class="amount" id="budget-remaining">0</div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="background-logo">
+    <svg viewBox="0 0 100 100">
+      <path d="M50 15 A35 35 0 1 0 50 85 A35 35 0 1 0 50 15 Z M50 20 A30 30 0 1 1 50 80 A30 30 0 1 1 50 20 Z"/>
+      <path d="M50 30 A20 20 0 1 0 50 70 A20 20 0 1 0 50 30 Z"/>
+    </svg>
+  </div>
+
+  <script type="module" src="budget_overview.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

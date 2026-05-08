@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expense Tracker - Manage Expenses</title>
+
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="manage_expense.css">
+</head>
+<body>
+
+<header>
+  <div class="hamburger" id="hamburger">☰</div>
+  <h1 class="header-title">Expenses</h1>
+</header>
+<div class="overlay" id="overlay"></div>
+
+<aside id="sidebar" class="sidebar">
+  <ul>
+    <li><a href="budget_overview.html"><i class="fas fa-home"></i>Dashboard</a></li>
+    
+    <li class="collapsible-parent">
+      <a href="#" class="collapsible-btn">
+        <i class="fas fa-plus"></i>Manage
+        <i class="fas fa-chevron-down collapsible-icon"></i>
+      </a>
+      <ul class="collapsible-content">
+        <li><a href="manage_expense.html"><i class="fas fa-dollar-sign"></i>Expense</a></li>
+        <li><a href="manage_income.html"><i class="fas fa-sack-dollar"></i>Income</a></li>
+      </ul>
+    </li>
+
+    <li><a href="budget_overview.html"><i class="fas fa-wallet"></i>Budget</a></li>
+    <li><a href="profile.html"><i class="fas fa-user"></i>Profile</a></li>
+    <li style="margin-top:20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:20px;">
+      <a href="index.html" style="color:var(--text-secondary);"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </li>
+  </ul>
+</aside>
+
+<div class="container">
+  <h1 class="page-title">Manage Your Expenses</h1>
+
+  <div class="content">
+    <section class="glass-box">
+      <h2>Add New Expense</h2>
+      <form id="expense-form">
+        <div class="form-group">
+          <label for="title">Expense Title</label>
+          <input type="text" id="title" placeholder="e.g., Groceries" required>
+        </div>
+
+        <label for="amount">Amount (₹)</label>
+        <div class="form-group">
+          <input type="number" id="amount" min="0" step="0.01" placeholder="0.00" required>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" required>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="">Select a category</option>
+            <option value="food">Food</option>
+            <option value="travel">Travel</option>
+            <option value="bills">Bills</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="shopping">Shopping</option>
+            <option value="other">Other</option>
+            <option value="add-new">➕ Add New Category</option>
+          </select>
+        </div>
+
+        <!-- Custom category input (hidden by default) -->
+        <div class="form-group" id="custom-category-group" style="display:none;">
+          <label for="custom-category">New Category</label>
+          <input type="text" id="custom-category" placeholder="Enter category name">
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes (Optional)</label>
+          <textarea id="notes" rows="3" placeholder="Add any additional details"></textarea>
+        </div>
+
+        <button type="submit">Add Expense</button>
+      </form>
+    </section>
+
+    <section class="glass-box">
+      <h2>Expense Summary</h2>
+      
+      <div class="summary-cards">
+          <div class="summary-card">
+              <div class="summary-value" id="summary-month">₹0.00</div>
+              <div class="summary-label">This Month</div>
+          </div>
+          <div class="summary-card">
+              <div class="summary-value" id="summary-year">₹0.00</div>
+              <div class="summary-label">This Year</div>
+          </div>
+          <div class="summary-card">
+              <div class="summary-value" id="summary-avg">₹0.00</div>
+              <div class="summary-label">Monthly Average</div>
+          </div>
+      </div>
+
+      <h2>Your Expenses</h2>
+
+      <div id="expenses-container">
+        <table id="expenses-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Receipt</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="expenses-body"></tbody>
+        </table>
+
+        <div id="empty-state" class="empty-state">
+          <i class="fas fa-receipt"></i>
+          <p>No expenses added yet</p>
+        </div>
+      </div>
+
+      <div class="total-expenses">
+        Total: ₹<span id="total-amount">0.00</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="background-logo">
+    <svg viewBox="0 0 500 500">
+      <path d="M250 0C111.93 0 0 111.93 0 250s111.93 250 250 250 250-111.93 250-250S388.07 0 250 0zm0 475C129.11 475 30 375.89 30 255S129.11 35 250 35s220 99.11 220 220-99.11 220-220 220zm-75-220a75 75 0 1 0 150 0 75 75 0 0 0-150 0z"/>
+    </svg>
+  </div>
+</div>
+
+<!-- Receipt Modal -->
+<div id="receipt-modal" class="modal-overlay">
+  <div class="modal-content">
+    <button id="modal-close-btn" class="modal-close">&times;</button>
+    <h2>Add Receipt for "<span id="modal-expense-title"></span>"</h2>
+    <form id="receipt-modal-form">
+      <input type="hidden" id="modal-expense-id">
+      
+      <div class="form-group">
+        <label for="receipt-input">Select Receipt Image</label>
+        <input type="file" id="receipt-input" accept="image/*" required>
+      </div>
+      
+      <button type="submit">Save Receipt</button>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="manage_expense.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>
